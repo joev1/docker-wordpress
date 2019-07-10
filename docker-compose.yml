@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 
 services:
   db:
@@ -18,11 +18,13 @@ services:
       - db
     build:
       context: wp
+    env_file:
+      - .env
     ports:
       - '8000:80'
     restart: always
     volumes:
-      -./wp:/var/www/html
+      - ./wp:/var/www/html
     environment:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_USER: ${MYSQL_USER}
